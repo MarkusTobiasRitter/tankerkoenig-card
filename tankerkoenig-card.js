@@ -37,10 +37,11 @@ class TankerkoenigCard extends LitElement {
         let header = '';
         
         if(this.show_header === true) {
-            header = this.config.name || 'Tankerkönig';
+            header = this.config.title || 'Tankerkönig';
         }
         
-        return html`<ha-card elevation="2" header="${header}">
+        return html`<ha-card elevation="2">
+            <h1 class="card-header"><div class="card-header">${header}</div></h1>
             <div class="container">
                 <table width="100%">
                     ${this.stations.map((station) => {
@@ -50,7 +51,7 @@ class TankerkoenigCard extends LitElement {
                         return html`<tr>
                         
                         <td class="logo"><a href="${station.link}" target="_blank"><img height="40" width="40" src="/local/community/tankerkoenig-card/logos/${station.brand.toLowerCase()}.png"></a></td>
-                        <td class="name">${station.brand} <br> ${station.street} <br> ${station.city}</td>
+                        <td class="name">${station.name} <br> ${station.street} <br> ${station.city}</td>
                         ${this.renderPrice(station, 'e5')}
                         ${this.renderPrice(station, 'e10')}
                         ${this.renderPrice(station, 'diesel')}
@@ -88,11 +89,11 @@ class TankerkoenigCard extends LitElement {
     
     renderPriceVPower(station, type)
     {
-		if(station.brand == 'SHELL' && type == 'e5')
+		if(station.brand == 'shell' && type == 'e5')
 		{
 		    const state = this.hass.states[station[type]] || null;
             if(state && state.state != 'unknown' && state.state != 'unavailable' && this.isOpen(station)) {
-				const vpowerSurcharge = 0.23000;
+				const vpowerSurcharge = 0.230;
 		        const vPriceStrg = Number((state.state*1 + vpowerSurcharge).toFixed(3)) + '';
                 let digits = this.config.digits || '3';
                        
@@ -195,4 +196,3 @@ class TankerkoenigCard extends LitElement {
 }
 
 customElements.define('tankerkoenig-card', TankerkoenigCard);
-
