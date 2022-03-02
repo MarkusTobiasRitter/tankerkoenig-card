@@ -5,6 +5,9 @@ import {
     property
 } from "https://unpkg.com/lit-element@2.3.1/lit-element.js?module";
 
+const tankerkoenigVersion = "1.1.0";
+console.info("%c Tankerkoenig-Card %c ".concat(tankerkoenigVersion, " "), "color: white; background: #555555; ", "color: white; background: #3a7ec6; ");
+
 class TankerkoenigCard extends LitElement {
     static get properties() {
         return {
@@ -15,15 +18,7 @@ class TankerkoenigCard extends LitElement {
     
     render() {
         this.stations.sort((a, b) => {
-            let key = '';
-            
-            if(a.diesel) {
-                key = 'diesel';
-            } else if(a.e5) {
-                key = 'e5';
-            } else if(a.e10) {
-                key = 'e10';
-            }
+            let key = this.config.sort || 'e5';
             
             if(this.hass.states[a[key]].state === 'unknown' || this.hass.states[a[key]].state === 'unavailable') {
                 return 1;
@@ -54,13 +49,12 @@ class TankerkoenigCard extends LitElement {
                     
                         return html`<tr>
                         
-                        <td class="logo"><img height="40" width="40" src="/local/gasstation_logos/${station.brand.toLowerCase()}.png"></td>
-                        <td class="name">${station.name}</td>
+                        <td class="logo"><a href="${station.link}" target="_blank"><img height="40" width="40" src="/local/community/tankerkoenig-card/logos/${station.brand.toLowerCase()}.png"></a></td>
+                        <td class="name">${station.brand} <br> ${station.street} <br> ${station.city}</td>
                         ${this.renderPrice(station, 'e5')}
                         ${this.renderPrice(station, 'e10')}
                         ${this.renderPrice(station, 'diesel')}
-                        
-                        
+                        ${this.renderPriceVPower(station, 'e5')}
                         </tr>`;
                     })}
                 </table>
@@ -92,24 +86,66 @@ class TankerkoenigCard extends LitElement {
         return false;
     }
     
+    renderPriceVPower(station, type)
+    {
+		if(station.brand == 'SHELL' && type == 'e5')
+		{
+		    const state = this.hass.states[station[type]] || null;
+            if(state && state.state != 'unknown' && state.state != 'unavailable' && this.isOpen(station)) {
+				const vpowerSurcharge = 0.23000;
+		        const vPriceStrg = Number((state.state*1 + vpowerSurcharge).toFixed(3)) + '';
+                let digits = this.config.digits || '3';
+                       
+                if(digits == '2')
+                {
+                    return html`<td><ha-label-badge
+                           label="V-RACING"
+                           ><span style="font-size: 75%;">${vPriceStrg.slice(0, -1)}&euro;</span></ha-label-badge></td>`;
+                }
+                else if(digits == '3')
+                {
+                    return html`<td><ha-label-badge
+                           label="V-RACING"
+                           ><span style="font-size: 75%;">${vPriceStrg.slice(0, -1)}<sup>${vPriceStrg.slice(-1)}</sup>&euro;</span></ha-label-badge></td>`;
+                }               
+            } else {
+                return html`<td><ha-label-badge
+                  label="V-RACING"
+                  ><ha-icon icon="mdi:gas-station-off-outline"></ha-icon></ha-label-badge></td>`;
+		    }
+		 }
+	}
+	
     renderPrice(station, type) {
         if(!this.has[type]) {
             return;
         }
-        
+                
         const state = this.hass.states[station[type]] || null;
-            
         if(state && state.state != 'unknown' && state.state != 'unavailable' && this.isOpen(station)) {
-            return html`<td><ha-label-badge
-              label="${type.toUpperCase()}"
-              @click="${() => this.fireEvent('hass-more-info', station[type])}"
-              ><span style="font-size: 75%;">${state.state}&euro;</span></ha-label-badge></td>`;
+            
+            let digits = this.config.digits || '3';
+            
+            
+            if(digits == '2')
+            {
+                return html`<td><ha-label-badge
+                  label="${type.toUpperCase()}"
+                  @click="${() => this.fireEvent('hass-more-info', station[type])}"
+                  ><span style="font-size: 75%;">${state.state.slice(0, -1)}&euro;</span></ha-label-badge></td>`;
+            }
+            else if(digits == '3')
+            {
+                return html`<td><ha-label-badge
+                  label="${type.toUpperCase()}"
+                  @click="${() => this.fireEvent('hass-more-info', station[type])}"
+                  ><span style="font-size: 75%;">${state.state.slice(0, -1)}<sup>${state.state.slice(-1)}</sup>&euro;</span></ha-label-badge></td>`;
+            }
         } else {
             return html`<td><ha-label-badge
-              icon="mdi:lock-outline"
               label="${type.toUpperCase()}"
               @click="${() => this.fireEvent('hass-more-info', station[type])}"
-              ></ha-label-badge></td>`;
+              ><ha-icon icon="mdi:gas-station-off-outline"></ha-icon></ha-label-badge></td>`;
         }
     }
     
@@ -159,3 +195,4 @@ class TankerkoenigCard extends LitElement {
 }
 
 customElements.define('tankerkoenig-card', TankerkoenigCard);
+
