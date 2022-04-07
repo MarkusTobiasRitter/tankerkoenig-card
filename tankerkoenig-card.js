@@ -5,7 +5,7 @@ import {
     property
 } from "https://unpkg.com/lit-element@2.3.1/lit-element.js?module";
 
-const tankerkoenigVersion = "1.1.0";
+const tankerkoenigVersion = "1.2.0";
 console.info("%c Tankerkoenig-Card %c ".concat(tankerkoenigVersion, " "), "color: white; background: #555555; ", "color: white; background: #3a7ec6; ");
 
 class TankerkoenigCard extends LitElement {
@@ -19,7 +19,7 @@ class TankerkoenigCard extends LitElement {
     render() {
         this.stations.sort((a, b) => {
             let key = this.config.sort || 'e5';
-            
+           
             if(this.hass.states[a[key]].state === 'unknown' || this.hass.states[a[key]].state === 'unavailable') {
                 return 1;
             }
@@ -63,28 +63,12 @@ class TankerkoenigCard extends LitElement {
         </ha-card>`;
     }
     
-    getStationState(station) {
-        let state = null;
-        
-        if(this.has.e5) {
-            state = this.hass.states[station.e5] || null;
-        } else if(this.has.e10) {
-            state = this.hass.states[station.e10] || null;
-        } else if(this.has.diesel) {
-            state = this.hass.states[station.diesel] || null;
-        }
-        
-        return state;
-    }
-    
     isOpen(station) {
-        const state = this.getStationState(station);
-        
-        if(state && state.attributes.is_open) {
-            return true;
+        const state = this.hass.states[station.status].state || null;
+        if(state && state != "on") {
+            return false;
         }
-        
-        return false;
+        return true;
     }
     
     renderPriceVPower(station, type)
@@ -93,7 +77,7 @@ class TankerkoenigCard extends LitElement {
 		{
 		    const state = this.hass.states[station[type]] || null;
             if(state && state.state != 'unknown' && state.state != 'unavailable' && this.isOpen(station)) {
-				const vpowerSurcharge = 0.230;
+				const vpowerSurcharge = 0.250;
 		        const vPriceStrg = Number((state.state*1 + vpowerSurcharge).toFixed(3)) + '';
                 let digits = this.config.digits || '3';
                        
@@ -123,10 +107,10 @@ class TankerkoenigCard extends LitElement {
         }
                 
         const state = this.hass.states[station[type]] || null;
+
         if(state && state.state != 'unknown' && state.state != 'unavailable' && this.isOpen(station)) {
             
             let digits = this.config.digits || '3';
-            
             
             if(digits == '2')
             {
