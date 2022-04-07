@@ -1,8 +1,7 @@
 ﻿# Tankerkoenig Lovelace Card
 
-[![Version](https://img.shields.io/badge/version-1.2.0-green.svg?style=for-the-badge)](#) [![mantained](https://img.shields.io/maintenance/yes/2021.svg?style=for-the-badge)](#) [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
+[![Version](https://img.shields.io/badge/version-1.2.0-green.svg?style=for-the-badge)](#) [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
-[![maintainer](https://img.shields.io/badge/maintainer-Goran%20Zunic%20%40panbachi-blue.svg?style=for-the-badge)](https://www.panbachi.de)
 
 ## Thanksgiving
 Original: https://github.com/panbachi/tankerkoenig-card
