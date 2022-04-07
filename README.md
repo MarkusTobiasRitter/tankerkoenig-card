@@ -1,6 +1,6 @@
 ﻿# Tankerkoenig Dashboard-Card
 
-[![Version](https://img.shields.io/badge/version-1.2.0-green.svg?style=for-the-badge)](#) [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
+[![Version](https://img.shields.io/badge/version-1.2.0-green.svg?style=for-the-badge)](#) [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
 
 ## Thanksgiving
@@ -17,9 +17,8 @@ Fork:     https://github.com/KrX3D/tankerkoenig-card
 - change Card-Title from name to title
 
 ## Installation
-1. Install this component by copying the `tankerkoenig-card.js` to your `/www/community/tankerkoenig-card/` folder.
-2. Add this to your Lovelace-Configuration -> Ressource as a js-Modul
-3. Create a lovelance - customizing-Card with following code
+1. Use HACS to install this component
+2. Create a Dashboard-customizing-Card with following code
 
 ```yaml
 type: custom:tankerkoenig-card
