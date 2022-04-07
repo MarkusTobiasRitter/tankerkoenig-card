@@ -38,43 +38,34 @@ stations:
     street: Bahnstr. 27
     city: 50181 Bedburg
     link: https://find.shell.com/de/fuel/10025871-bedburg-bahnstr-27/de_DE
-    e5: sensor.tankerkoenig_shell_bedburg_bahnstr_27_e5
-    diesel: sensor.tankerkoenig_shell_bedburg_bahnstr_27_diesel
+    e5: sensor.shell_bahnstr_27_super
+    diesel: sensor.shell_bahnstr_27_diesel
+    status: binary_sensor.shell_bahnstr_27_status
   - brand: shell
     name: SHELL Deutschland GmbH
     street: Neusser Str. 55
     city: 50181 Bedburg
     link: https://find.shell.com/de/fuel/10024920-bedburg-neusser-str/de_DE
-    e5: sensor.tankerkoenig_shell_bedburg_neusser_str_55_e5
-    diesel: sensor.tankerkoenig_shell_bedburg_neusser_str_55_diesel
+    e5: sensor.shell_neusser_str_55_super
+    diesel: sensor.shell_neusser_str_55_diesel
+    status: binary_sensor.shell_neusser_str_55_status
   - brand: wippenhohn
-    name: Freie Tankstelle Wippenhohn e.K
-    street: Robert-Bosch-Str. 2
+    name: Freie Tankstelle Wippenhohn
+    street: Robert-Bosch-Straße 2
     city: 50181 Bedburg
-    link: http://www.wippenhohn.com/
-    e5: sensor.tankerkoenig_tankstelle_wippenhohn_e5
-    diesel: sensor.tankerkoenig_tankstelle_wippenhohn_diesel
-  - brand: aral
-    name: ARAL AG
-    street: BAB 61 - Ost
-    city: 50181 Bedburg
-    link: https://tankstelle.aral.de/tankstelle/20169700
-    e5: sensor.tankerkoenig_aral_tankstelle_bat_bedburger_land_ost_e5
-    diesel: sensor.tankerkoenig_aral_tankstelle_bat_bedburger_land_ost_diesel
-  - brand: aral
-    name: ARAL AG
-    street: BAB 61 - West
-    city: 50181 Bedburg
-    link: https://tankstelle.aral.de/tankstelle/20185000
-    e5: sensor.tankerkoenig_aral_tankstelle_bat_bedburger_land_west_e5
-    diesel: sensor.tankerkoenig_aral_tankstelle_bat_bedburger_land_west_diesel
+    link: https://www.wippenhohn.com/index.html
+    e5: sensor.freie_tankstelle_e_wippenhohn_e_k_robert_bosch_str_2_super
+    diesel: sensor.freie_tankstelle_e_wippenhohn_e_k_robert_bosch_str_2_diesel
+    status: binary_sensor.freie_tankstelle_e_wippenhohn_e_k_robert_bosch_str_2_status
   - brand: avex
-    name: AVEX GmbH
+    name: AVEX Tankstelle
     street: Glescher Str. 126
     city: 50126 Bergheim
     link: https://www.avex-tankstellen.de/standorte/bergheim-paffendorf/
-    e5: sensor.tankerkoenig_avex_bergheim_e5
-    diesel: sensor.tankerkoenig_avex_bergheim_diesel
+    e5: sensor.avex_glescher_str_126_super
+    diesel: sensor.avex_glescher_str_126_diesel
+    status: binary_sensor.avex_glescher_str_126_status
+
 ```
 
 ### Options
@@ -97,6 +88,7 @@ stations:
 | `e5`     | Sensor | no*      | Sensor for the E5 price
 | `e10`    | Sensor | no*      | Sensor for the E10 price
 | `diesel` | Sensor | no*      | Sensor for the diesel price
+| `status` | Sensor | no*      | Binary Sensor for the Open/Close Status
 
 *only required if it should be shown
 
