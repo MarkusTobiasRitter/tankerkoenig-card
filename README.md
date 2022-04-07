@@ -14,7 +14,7 @@ Fork:     https://github.com/KrX3D/tankerkoenig-card
 - add Station-LINK on Station-IMG customizing over Card-Entity
 - add Station-NAME over Card-Entity
 - change localisation for Station-LOGOS to /www/community/tankerkoenig-card/logos/
-- add calculated(!) Price for V-Power Racing (only Shell-Stations) (Surcharge is customizing in the js-Code; +0,23 Cent)
+- add calculated(!) Price for V-Power Racing (only Shell-Stations) (Surcharge is customizing in the js-Code; +0,25 Cent)
 - change Card-Title from name to title
 
 ## Installation
