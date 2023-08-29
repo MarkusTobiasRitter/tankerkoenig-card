@@ -73,7 +73,7 @@ class TankerkoenigCard extends LitElement {
     
     renderPriceVPower(station, type)
     {
-	    if(this.calc_vpower === true) {
+	    if(this.config.calc_vpower == true) {
 			if(station.brand == 'shell' && type == 'e5')
 			{
 			    const state = this.hass.states[station[type]] || null;
