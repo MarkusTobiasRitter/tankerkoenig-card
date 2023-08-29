@@ -55,9 +55,7 @@ class TankerkoenigCard extends LitElement {
                         ${this.renderPrice(station, 'e5')}
                         ${this.renderPrice(station, 'e10')}
                         ${this.renderPrice(station, 'diesel')}
-			if(this.calc_vpower === true) {
-                            ${this.renderPriceVPower(station, 'e5')}
-			}
+                 	${this.renderPriceVPower(station, 'e5')}
                         </tr>`;
                     })}
                 </table>
@@ -75,32 +73,34 @@ class TankerkoenigCard extends LitElement {
     
     renderPriceVPower(station, type)
     {
-		if(station.brand == 'shell' && type == 'e5')
-		{
-		    const state = this.hass.states[station[type]] || null;
-            if(state && state.state != 'unknown' && state.state != 'unavailable' && this.isOpen(station)) {
-				const vpowerSurcharge = 0.250;
-		        const vPriceStrg = Number((state.state*1 + vpowerSurcharge).toFixed(3)) + '';
-                let digits = this.config.digits || '3';
-                       
-                if(digits == '2')
-                {
-                    return html`<td><ha-label-badge
-                           label="V-RACING"
-                           ><span style="font-size: 75%;">${vPriceStrg.slice(0, -1)}&euro;</span></ha-label-badge></td>`;
-                }
-                else if(digits == '3')
-                {
-                    return html`<td><ha-label-badge
-                           label="V-RACING"
-                           ><span style="font-size: 75%;">${vPriceStrg.slice(0, -1)}<sup>${vPriceStrg.slice(-1)}</sup>&euro;</span></ha-label-badge></td>`;
-                }               
-            } else {
-                return html`<td><ha-label-badge
-                  label="V-RACING"
-                  ><ha-icon icon="mdi:gas-station-off-outline"></ha-icon></ha-label-badge></td>`;
-		    }
-		 }
+	    if(this.calc_vpower === true) {
+			if(station.brand == 'shell' && type == 'e5')
+			{
+			    const state = this.hass.states[station[type]] || null;
+	            if(state && state.state != 'unknown' && state.state != 'unavailable' && this.isOpen(station)) {
+					const vpowerSurcharge = 0.250;
+			        const vPriceStrg = Number((state.state*1 + vpowerSurcharge).toFixed(3)) + '';
+	                let digits = this.config.digits || '3';
+	                       
+	                if(digits == '2')
+	                {
+	                    return html`<td><ha-label-badge
+	                           label="V-RACING"
+	                           ><span style="font-size: 75%;">${vPriceStrg.slice(0, -1)}&euro;</span></ha-label-badge></td>`;
+	                }
+	                else if(digits == '3')
+	                {
+	                    return html`<td><ha-label-badge
+	                           label="V-RACING"
+	                           ><span style="font-size: 75%;">${vPriceStrg.slice(0, -1)}<sup>${vPriceStrg.slice(-1)}</sup>&euro;</span></ha-label-badge></td>`;
+	                }               
+	            } else {
+	                return html`<td><ha-label-badge
+	                  label="V-RACING"
+	                  ><ha-icon icon="mdi:gas-station-off-outline"></ha-icon></ha-label-badge></td>`;
+			    }
+			 }
+	    }
 	}
 	
     renderPrice(station, type) {
