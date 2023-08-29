@@ -70,7 +70,7 @@ stations:
 | `show`        | [e5, e10, diesel] | yes      | What should be shown
 | `show_closed` | Boolean           | no       | Show closed stations (default: false)
 | `show_header` | Boolean           | no       | Show card-header (default: true)
-| `calc_vpower` | Boolean           | no       | Show card-header (default: true)
+| `calc_vpower` | Boolean           | no       | Calcluate VPower price (default: false)
 | `stations`    | List of stations  | yes      | List of stations
 
 #### Stations
