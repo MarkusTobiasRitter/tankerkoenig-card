@@ -94,7 +94,7 @@ To use the icons you have to use lowercase names, which has to be the same as in
 ### Example
 For the brand ARAL there has to be an icon with the following path:
 
-`/www/cgasstation_logo/aral.png`
+`/www/gasstation_logo/aral.png`
 
 ### Screenshot
 <img width="496" alt="image" src="https://user-images.githubusercontent.com/97361636/156403353-a7e4051c-aee0-4079-b60e-e2d5e1b9bd26.png">
