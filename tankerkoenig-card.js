@@ -55,7 +55,9 @@ class TankerkoenigCard extends LitElement {
                         ${this.renderPrice(station, 'e5')}
                         ${this.renderPrice(station, 'e10')}
                         ${this.renderPrice(station, 'diesel')}
-                        ${this.renderPriceVPower(station, 'e5')}
+			if(this.calc_vpower === true) {
+                            ${this.renderPriceVPower(station, 'e5')}
+			}
                         </tr>`;
                     })}
                 </table>
