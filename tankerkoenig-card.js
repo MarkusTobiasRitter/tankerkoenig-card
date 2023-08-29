@@ -154,6 +154,12 @@ class TankerkoenigCard extends LitElement {
         } else {
             this.show_header = false;
         }
+	    
+        if(this.config.calc_vpower !== false) {
+            this.calc_vpower = true;
+        } else {
+            this.calc_vpower = false;
+        }
         
         this.has = {
             e5: this.config.show.indexOf('e5') !== -1,
