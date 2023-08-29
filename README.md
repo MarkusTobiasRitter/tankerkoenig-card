@@ -6,15 +6,11 @@
 ## Thanksgiving
 Original: https://github.com/panbachi/tankerkoenig-card
 
-Fork:     https://github.com/KrX3D/tankerkoenig-card
+Fork:     https://github.com/GerdRuetten/tankerkoenig-card
 
 ## Changed in this fork
-- add js-Console - Info 
-- add Station-LINK on Station-IMG customizing over Card-Entity
-- add Station-NAME over Card-Entity
-- change localisation for Station-LOGOS to /www/community/tankerkoenig-card/logos/
-- add calculated(!) Price for V-Power Racing (only Shell-Stations) (Surcharge is customizing in the js-Code; +0,25 Cent)
-- change Card-Title from name to title
+- added variable for VPower calculation
+- change localisation for Station-LOGOS to /www/gasstation_logo/
 
 ## Installation
 1. Use HACS to install this component
@@ -30,6 +26,7 @@ sort: e5
 digits: 3
 show_closed: true
 show_header: true
+calc_vpower: false
 stations:
   - brand: shell
     name: SHELL Deutschland GmbH
@@ -69,10 +66,11 @@ stations:
 ### Options
 | key           | values            | required | description
 |---------------|-------------------|----------|---
-| `title`        | String            | yes      | Name of the card that should be shown in the frontend
+| `title`        | String           | yes      | Name of the card that should be shown in the frontend
 | `show`        | [e5, e10, diesel] | yes      | What should be shown
 | `show_closed` | Boolean           | no       | Show closed stations (default: false)
 | `show_header` | Boolean           | no       | Show card-header (default: true)
+| `calc_vpower` | Boolean           | no       | Show card-header (default: true)
 | `stations`    | List of stations  | yes      | List of stations
 
 #### Stations
@@ -96,7 +94,7 @@ To use the icons you have to use lowercase names, which has to be the same as in
 ### Example
 For the brand ARAL there has to be an icon with the following path:
 
-`/www/community/tankerkoenig-card/logos/aral.png`
+`/www/cgasstation_logo/aral.png`
 
 ### Screenshot
 <img width="496" alt="image" src="https://user-images.githubusercontent.com/97361636/156403353-a7e4051c-aee0-4079-b60e-e2d5e1b9bd26.png">
